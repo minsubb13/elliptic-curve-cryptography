@@ -15,7 +15,7 @@ This implementation allows you to:
 
 1. Clone the repository and navigate to the project directory:
    ```
-   $ git clone
+   $ git clone https://github.com/minsubb13/ECC.git
    $ cd ECC/
    ```
 
