@@ -5,7 +5,6 @@ This repository contains C++ implmentations of Elliptic Curve Cryptography (ECC)
 This code is based on the blog post series [Elliptic Curve Cryptography: a gentle introduction](http://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/)
 
 ## Features
-This implementation allows you to:
 - Test modular arithmetic operations
 - Explorer basic functions of elliptic curves
 - Perform ECDH (Elliptic Curve Diffie-Hellman) key exchange
@@ -36,3 +35,11 @@ For additional commands and options, use the help command:
 ```
 $ ./ecc help
 ```
+
+
+
+## TODO
+
+- Implementation of big number library (like `GMP`, `BIGNUM`)
+
+- Implementation to Rust
