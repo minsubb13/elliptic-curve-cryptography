@@ -1,8 +1,12 @@
 #include "pollard_rho.h"
 
-std::tuple<long long, long long> pseudo_random_func(
-            EllipticCurve& curve, Point& X, long long a, long long b) {
-    ModularArithmetic mod(curve.n);
+std::tuple<long long, long long> pseudo_random_func(EllipticCurve& curve,
+                                                    Point& X,
+                                                    long long a,
+                                                    long long b)
+{
+    long long order = curve.get_order();
+    ModularArithmetic mod(order);
     long long set = X.x % 3;
     long long newA;
     long long newB;
@@ -26,9 +30,12 @@ std::tuple<long long, long long> pseudo_random_func(
     return std::make_tuple(newA, newB);
 }
 
-std::tuple<long long, long long> pollard_rho(
-                        EllipticCurve& curve, Point& P, Point& Q) {
-    ModularArithmetic mod(curve.n);
+std::tuple<long long, long long> pollard_rho(EllipticCurve& curve,
+                                             Point& P,
+                                             Point& Q)
+{
+    long long order = curve.get_order();
+    ModularArithmetic mod(order);
     long long steps = 0;
     Point X_tortoise = P;
     long long a_tortoise = 0;

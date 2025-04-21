@@ -48,9 +48,12 @@ void test_elliptic_curve() {
         g,
         100
     );
+
+    long long order = curve.get_order();
+
     std::cout << "Elliptic Curve: " << curve.toString() << std::endl;
     std::cout << "g : (" << g.x << ", " << g.y << ")" << std::endl;
-    std::cout << "Cyclic subgroup order (n) : " << curve.n << std::endl;
+    std::cout << "Cyclic subgroup order (n) : " << order << std::endl;
     std::cout << std::endl;
 
     Point P(17, 10);
@@ -83,9 +86,11 @@ void test_ecdh() {
         g,
         10331
     );
+    long long order = curve.get_order();
+
     std::cout << "Elliptic Curve: " << curve.toString() << std::endl;
     std::cout << "g : (" << g.x << ", " << g.y << ")" << std::endl;
-    std::cout << "Cyclic subgroup order (n) : " << curve.n << std::endl;
+    std::cout << "Cyclic subgroup order (n) : " << order << std::endl;
     std::cout << std::endl;
 
     auto [Alice_private_key, Alice_public_key] = make_keypair(curve);
@@ -105,10 +110,10 @@ void test_ecdh() {
               << alice_shared_secret.y << ")" << std::dec << std::endl;
     std::cout << "Bob's shared secret: (" << bob_shared_secret.x << ", "
               << bob_shared_secret.y << ")" << std::dec << std::endl;
-    std::cout << "Do Alice's and Bob's shared secrets match?"
-        << (alice_shared_secret.x == bob_shared_secret.x 
-            && alice_shared_secret.y == bob_shared_secret.y 
-            ? "Yes" : "No") << std::endl;
+    std::cout << "Do Alice's and Bob's shared secrets match? "
+              << (alice_shared_secret.x == bob_shared_secret.x 
+                  && alice_shared_secret.y == bob_shared_secret.y 
+                  ? "Yes" : "No") << std::endl;
 }
 
 void test_dlp_solvers() {
@@ -123,19 +128,22 @@ void test_dlp_solvers() {
         g,
         10331
     );
+    long long order = curve.get_order();
+    Point generator = curve.get_generator();
+
     std::cout << "Elliptic Curve: " << curve.toString() << std::endl;
     std::cout << "g : (" << g.x << ", " << g.y << ")" << std::endl;
-    std::cout << "Cyclic subgroup order (n) : " << curve.n << std::endl;
+    std::cout << "Cyclic subgroup order (n) : " << order << std::endl;
     std::cout << std::endl;
 
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<long long> dis(0, curve.n);
+    std::uniform_int_distribution<long long> dis(0, order);
 
     std::cout << '\n';
     std::cout << "Creating point P, Q and integer x such that Q = xP" << std::endl;
     long long x = dis(gen);
-    Point P = curve.g;
+    Point P = generator;
     Point Q = curve.scalar_multi(x, P);
     std::cout << "P : (" << P.x << ", " << P.y << ")" << std::endl;
     std::cout << "Q : (" << Q.x << ", " << Q.y << ")" << std::endl;

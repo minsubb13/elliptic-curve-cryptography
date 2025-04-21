@@ -10,7 +10,7 @@
 #include <tuple>
 
 inline std::tuple<long long, long long, long long> extended_euclidean_algorithm
-                                        (long long a, long long b) {
+                                                    (long long a, long long b) {
     long long old_r = a, r = b;
     long long old_s = 1, s = 0;
     long long old_t = 0, t = 1;
@@ -32,10 +32,10 @@ inline std::tuple<long long, long long, long long> extended_euclidean_algorithm
 }
 
 class ModularArithmetic {
-private:
+  private:
     long long modulus;
 
-public:
+  public:
     ModularArithmetic(long long modulus);
 
     long long normalize(long long a) const;

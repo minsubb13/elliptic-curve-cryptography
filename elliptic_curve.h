@@ -22,7 +22,7 @@ struct Point {
 };
 
 class EllipticCurve {
-public:
+  private:
     ModularArithmetic Fp;
     long long a;
     long long b;
@@ -30,14 +30,21 @@ public:
     long long n;
     // long long h;
 
-    EllipticCurve(const ModularArithmetic& Fp, long long a, long long b,
-                  const Point& g, long long n);
+  public:
+    EllipticCurve(const ModularArithmetic& Fp,
+                  long long a,
+                  long long b,
+                  const Point& g,
+                  long long n);
     
     bool is_on_curve(const Point& point) const;
     Point inverse_of_point(const Point& point) const;
     Point add(const Point& point1, const Point& point2) const;
     Point doublePoint(const Point& point) const;
     Point scalar_multi(long long scalar, const Point& point) const;
+
+    long long get_order() const { return n; }
+    Point get_generator() const { return g; }
 
     std::string toString() const {
         std::ostringstream oss;

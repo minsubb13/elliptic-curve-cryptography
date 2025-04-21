@@ -1,25 +1,30 @@
 #include "baby_giant_step.h"
 #include <unordered_map>
 
+// caculate hash
 namespace std {
     template<>
     struct hash<Point> {
         std::size_t operator() (const Point& point) const noexcept {
-            return std::hash<long long>()(point.x) ^
-                            (std::hash<long long>()(point.y) << 1);
+            return std::hash<long long>()(point.x)
+                ^ (std::hash<long long>()(point.y) << 1);
         }
     };
 }
 
-std::tuple<long long, long long> Babystep_Giantstep(
-                                EllipticCurve& curve, Point& P, Point& Q) {
+std::tuple<long long, long long> Babystep_Giantstep(EllipticCurve& curve,
+                                                    Point& P,
+                                                    Point& Q)
+{
+    long long order = curve.get_order();
     if (curve.is_on_curve(P) == false || curve.is_on_curve(Q) == false) {
         throw std::invalid_argument("P or Q are not on curve");
     }
 
-    ModularArithmetic mod(curve.n);
-    long long m = std::ceil(std::sqrt(static_cast<double>(curve.n)));
-
+    ModularArithmetic mod(order);
+    long long m = std::ceil(std::sqrt(static_cast<double>(order)));
+    
+    // Using hash data structure for baby-step, giant-step algorithm
     std::unordered_map<Point, long long> hashed_baby;
     for (long long b = 0; b <= m; b++) {
         Point baby = curve.scalar_multi(b, P);

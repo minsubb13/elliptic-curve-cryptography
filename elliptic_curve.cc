@@ -1,9 +1,12 @@
 #include "elliptic_curve.h"
 
-EllipticCurve::EllipticCurve(const ModularArithmetic& _Fp, long long _a,
-                             long long _b, const Point& _g, long long _n)
-    : Fp(_Fp), a(_a), b(_b), g(_g), n(_n) {
-
+EllipticCurve::EllipticCurve(const ModularArithmetic& _Fp,
+                             long long _a,
+                             long long _b,
+                             const Point& _g,
+                             long long _n)
+    : Fp(_Fp), a(_a), b(_b), g(_g), n(_n)
+{
     long long p = Fp.getModulus();
     if (Fp.power(2, p - 1) != 1) {
         throw std::invalid_argument(
