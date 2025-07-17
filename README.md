@@ -14,8 +14,8 @@ This code is based on the blog post series [Elliptic Curve Cryptography: a gentl
 
 1. Clone the repository and navigate to the project directory:
    ```
-   $ git clone https://github.com/minsubb13/ECC.git
-   $ cd ECC/
+   $ git clone [https://github.com/minsubb13/ECC.git](https://github.com/minsubb13/elliptic-curve-cryptography.git)
+   $ cd elliptic-curve-cryptography/
    ```
 
 2. Complie the code:
@@ -42,4 +42,4 @@ $ ./ecc help
 
 - Implementation of big number library (like `GMP`, `BIGNUM`)
 
-- Implementation to Rust
+- Implementation in Rust
